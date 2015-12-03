@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="8.5in" android:layout_height="11in"
+    android:id="@+id/pdflayout">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fuel Receipt Information"
+        android:id="@+id/pdfTitleText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0.5in" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        android:id="@+id/pdfLeftText"
+        android:layout_below="@+id/pdfTitleText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0.5in"
+        android:layout_marginTop="0.5in"
+        android:layout_toStartOf="@+id/pdfImageView"
+        android:layout_alignBottom="@+id/pdfImageView" />
+
+    <ImageView
+        android:layout_width="3in"
+        android:layout_height="7in"
+        android:id="@+id/pdfImageView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="0.5in"
+        android:layout_marginRight="0.5in"/>
+
+</RelativeLayout>
