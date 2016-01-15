@@ -9,7 +9,7 @@
         <title>CAP Fuel Receipt System</title>
         <link href="bootstrap.css" rel="stylesheet">
         <link href="stylish-portfolio.css" rel="stylesheet">
-        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="style.css" />
         <link rel="stylesheet" type="text/css" href="jquery.Jcrop.css" />
     </head>
@@ -133,19 +133,6 @@
                 e.preventDefault();
                 //todo: instead of hard coding layout, parse a layout xml file that specifies
                 // position, text size, styling, header text, etc for each entry?
-                /*
-                var uploaded = document.getElementById("image-file");
-                var img = new Image();
-                if ('files' in uploaded) {
-                    if (uploaded.files.length == 0) {
-                        alert("Please select an image file before submitting.");
-                    } else if (uploaded.files.length > 1) {
-                        alert("Please submit only one image file.");
-                    } else {
-                        img.src = URL.createObjectURL(uploaded.files[0]);
-                    }
-                }
-                */
                 
                 var cropped = document.getElementById('cropped').getElementsByTagName('img');
                 //var img = cropped.getElementsByTagName('img')[0];
@@ -173,7 +160,6 @@
                     var total_hobs_time = parseFloat(document.getElementById("total_hobs_time").value);
                     var total_gallons = parseFloat(document.getElementById("total_gallons").value);
                     var total_cost = document.getElementById("total_cost").value;
-                    //var average_burn = document.getElementById("average_burn");
                     var average_burn = total_gallons / total_hobs_time;
                     var vendor_name = document.getElementById("vendor_name").value;
                     var vendor_location = document.getElementById("vendor_location").value;
@@ -196,6 +182,23 @@
                         blank = true;
                         allow = false;
                     }
+
+                    // Truncutation
+                    full_name       = full_name.substring(0, 64);
+                    cap_id          = cap_id.substring(0, 64);
+                    aircraft_tail   = aircraft_tail.substring(0,64);
+                    aircraft_model  = aircraft_model.substring(0,64);
+                    mission_number  = mission_number.substring(0,64);
+                    mission_symbol  = mission_symbol.substring(0,64);
+                    all_sorties     = all_sorties.substring(0,64);
+                    total_cost      = total_cost.substring(0,64);
+                    vendor_name     = vendor_name.substring(0,64);
+                    vendor_location = vendor_location.substring(0,64);
+
+                    remarks = remarks.substring(0,65*5);
+
+                    // Insert linebreaks into remarks
+                    remarks = "\r\n" + remarks.replace(/(.{65})/g, "$1\r\n")
                     
                     if (blank) {
                         if (confirm("Some fields appear to have been omited. Are you sure you want to continue?")) {
@@ -208,20 +211,20 @@
                         doc.setFontSize(20);
                         doc.text(20, 20, 'FUEL RECEIPT INFORMATION');
                         doc.setFontSize(12);
-                        doc.text(20, 30, 'FULL NAME: ' + full_name);
-                        doc.text(20, 40, 'CAP ID: ' + cap_id);
-                        doc.text(20, 45, 'AIRCRAFT TAIL #: ' + aircraft_tail + '  MODEL: ' + aircraft_model);
-                        doc.text(20, 50, 'MISSION DATE: ' + mission_date);
-                        doc.text(20, 55, 'MISSION SYMBOL: ' + mission_number);
-                        doc.text(20, 60, 'LIST ALL SORTIES INCLUDED: ' + all_sorties);
-                        doc.text(20, 65, 'TOTAL GALLONS FOR ALL SORTIES: ' + total_gallons);
-                        doc.text(20, 70, 'TOTAL COST FOR ALL SORTIES: $' + total_cost);
-                        doc.text(20, 75, 'AVG FUEL BURN: ' + average_burn.toFixed(1) + " Gallons/Hour");
-                        doc.text(20, 85, 'REMARKS: ' + remarks);
+                        doc.text(20, 30, 'FULL NAME : ' + full_name);
+                        doc.text(20, 40, 'CAP ID : ' + cap_id);
+                        doc.text(20, 45, 'AIRCRAFT TAIL # : ' + aircraft_tail + '  MODEL : ' + aircraft_model);
+                        doc.text(20, 50, 'MISSION DATE : ' + mission_date);
+                        doc.text(20, 55, 'MISSION SYMBOL : ' + mission_number);
+                        doc.text(20, 60, 'LIST ALL SORTIES INCLUDED : ' + all_sorties);
+                        doc.text(20, 65, 'TOTAL GALLONS FOR ALL SORTIES : ' + total_gallons);
+                        doc.text(20, 70, 'TOTAL COST FOR ALL SORTIES : $' + total_cost);
+                        doc.text(20, 75, 'AVG FUEL BURN : ' + average_burn.toFixed(1) + " Gallons/Hour");
 
-                        doc.text(20, 95, 'Vendor Name: ' + vendor_name);
-                        doc.text(20, 100, 'Vendor Location: ' + vendor_location);
-                        doc.text(20, 105, 'DATE OF FUEL SERVICE: ' + fuel_date);
+                        doc.text(20, 85, 'Vendor Name : ' + vendor_name);
+                        doc.text(20, 95, 'Vendor Location : ' + vendor_location);
+                        doc.text(20, 100, 'DATE OF FUEL SERVICE : ' + fuel_date);
+                        doc.text(20, 105, 'REMARKS : ' + remarks);
 
                         //todo: image rotate
                         //var imgRatio = img.width / img.height;
