@@ -16,15 +16,15 @@
     <body>
         <!-- Side Menu -->
         <a id="menu-toggle" href="#" class="btn btn-primary btn-lg toggle">
-             <i class="icon-reorder"></i>
+           Links
         </a>
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle">
-                     <i class="icon-remove"></i>
+                  <!--<i class="icon-remove"></i>-->
+                  Links
                 </a>
                 <li class="sidebar-brand">
-                    <p>Quick Links</p>
                 </li>
                 <li>
                      <a href="http://bellingham.wawg.cap.gov/">Bellingham Squadron Homepage</a>
@@ -76,13 +76,13 @@
                             <br>
                             <input type="text" size="40" id="all_sorties" placeholder="All sorties by mission number">
                             <br>
-                            <input type="text" size="40" id="total_hobs_time" placeholder="Total HOBBS time for all sorties">
+                            <input type="text" size="40" id="total_hobs_time" placeholder="Total HOBBS time in hours for all sorties">
                             <br>
                             <input type="text" size="40" id="total_gallons" placeholder="Total gallons for all sorties">
                             <br>
-                            <input type="text" size="40" id="average_burn" placeholder="Average Fuel Burn">
+                            <input type="text" size="40" id="average_burn" placeholder="Average Fuel Burn in gallons/hour">
                             <br>
-                            <input type="text" size="40" id="total_cost" placeholder="Total fuel cost for all sorties">
+                            <input type="text" size="40" id="total_cost" placeholder="Total fuel cost for all sorties in dollars">
                             <br>
                             <input type="text" size="40" id="vendor_name" placeholder="Fuel Vendor Name">
                             <br>
@@ -175,11 +175,11 @@
                         remarks = "None";
                     }
                     // Check for omissions
-                    if ((full_name === "") || (cap_id === "") || (aircraft_tail === "") ||
-                        (aircraft_model === "") || (mission_date === "") || (mission_number === "") ||
-                        (mission_symbol === "") || (all_sorties === "") || (total_hobs_time === "") ||
-                        (total_gallons === "") || (total_cost === "") || (vendor_name === "") ||
-                        (vendor_location === "") || (fuel_date === "")) {
+                    if ((full_name === "")        || (cap_id === "")        || (aircraft_tail === "")   ||
+                        (aircraft_model === "")   || (mission_date === "")  || (mission_number === "")  ||
+                        (mission_symbol === "")   || (all_sorties === "")   || (total_hobs_time === "") ||
+                        (total_gallons === "")    || (total_cost === "")    || (vendor_name === "")     ||
+                        (vendor_location === "")  || (fuel_date === "")) {
                         blank = true;
                         allow = false;
                     }

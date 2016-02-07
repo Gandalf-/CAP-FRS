@@ -73,6 +73,7 @@
     right: 0;
     position: fixed;
     z-index: 1;
+    font-size: 14px;
 }
 #sidebar-wrapper.active {
     right: 250px;
