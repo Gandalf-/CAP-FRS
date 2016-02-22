@@ -21,7 +21,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private Uri pdfUri;
     private Bitmap imgBitmap;
     private ReceiptFieldData fieldData;
-    File mediaStorageDir;
+    private File mediaStorageDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getPicture(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        imgUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+        imgUri = getOutputMediaFileUri();
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
 
         // start image capture intent
@@ -187,13 +186,13 @@ public class MainActivity extends AppCompatActivity {
     // Used a template from android developers
     // at http://developer.android.com/guide/topics/media/camera.html#saving-media
 
-    public static final int MEDIA_TYPE_IMAGE = 1;
-    public static final int MEDIA_TYPE_VIDEO = 2;
-    public static final int MEDIA_TYPE_PDF = 3;
+    private static final int MEDIA_TYPE_IMAGE = 1;
+    private static final int MEDIA_TYPE_VIDEO = 2;
+    private static final int MEDIA_TYPE_PDF = 3;
 
     /** Create a file Uri for saving an image or video or pdf */
-    private Uri getOutputMediaFileUri(int type){
-        return Uri.fromFile(getOutputMediaFile(type));
+    private Uri getOutputMediaFileUri(){
+        return Uri.fromFile(getOutputMediaFile(MainActivity.MEDIA_TYPE_IMAGE));
     }
 
     /** Create a File for saving an image or video or pdf */
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
-                Log.d("CAP_FRS", "failed to create directory");
+                //Log.d("CAP_FRS", "failed to create directory");
                 return null;
             }
         }
@@ -285,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
         if (totalGallons != null && hobbsTime != null) {
             try {
                 avgFuelBurn = Double.parseDouble(totalGallons.toString()) / Double.parseDouble(hobbsTime.toString());
-            } catch (NumberFormatException ex) {}
+            } catch (NumberFormatException ignored) {}
         }
         curData.avgFuelBurn = avgFuelBurn;
         curData.editRemarks = ((EditText) findViewById(R.id.editRemarks)).getText().toString();
@@ -381,8 +380,6 @@ public class MainActivity extends AppCompatActivity {
             out.close();
             // create the Uri
             pdfUri = Uri.fromFile(pdfFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
