@@ -6,6 +6,7 @@ public class ReceiptFieldData {
     public String editAircraftTail;
     public String editAircraftModel;
     public String editMissionDate;
+    public String editMissionNumber;
     public String editMissionSymbol;
     public String editSorties;
     public String editHobbsTime;
